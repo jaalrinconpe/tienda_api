@@ -11,48 +11,48 @@ namespace tienda_api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CargosController : ControllerBase
+    public class TiendasController : ControllerBase
     {
         private readonly TiendaContext _context;
 
-        public CargosController(TiendaContext context)
+        public TiendasController(TiendaContext context)
         {
             _context = context;
         }
 
-        // GET: api/Cargos
+        // GET: api/Tiendas
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Cargo>>> Getcargos()
+        public async Task<ActionResult<IEnumerable<Tienda>>> GetTienda()
         {
-            return await _context.cargo.ToListAsync();
+            return await _context.Tienda.ToListAsync();
         }
 
-        // GET: api/Cargos/5
+        // GET: api/Tiendas/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Cargo>> GetCargo(int id)
+        public async Task<ActionResult<Tienda>> GetTienda(int id)
         {
-            var cargo = await _context.cargo.FindAsync(id);
+            var tienda = await _context.Tienda.FindAsync(id);
 
-            if (cargo == null)
+            if (tienda == null)
             {
                 return NotFound();
             }
 
-            return cargo;
+            return tienda;
         }
 
-        // PUT: api/Cargos/5
+        // PUT: api/Tiendas/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCargo(int id, Cargo cargo)
+        public async Task<IActionResult> PutTienda(int id, Tienda tienda)
         {
-            if (id != cargo.ID_cargo)
+            if (id != tienda.ID_tienda)
             {
                 return BadRequest();
             }
 
-            _context.Entry(cargo).State = EntityState.Modified;
+            _context.Entry(tienda).State = EntityState.Modified;
 
             try
             {
@@ -60,7 +60,7 @@ namespace tienda_api.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!CargoExists(id))
+                if (!TiendaExists(id))
                 {
                     return NotFound();
                 }
@@ -73,37 +73,37 @@ namespace tienda_api.Controllers
             return NoContent();
         }
 
-        // POST: api/Cargos
+        // POST: api/Tiendas
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Cargo>> PostCargo(Cargo cargo)
+        public async Task<ActionResult<Tienda>> PostTienda(Tienda tienda)
         {
-            _context.cargo.Add(cargo);
+            _context.Tienda.Add(tienda);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetCargo", new { id = cargo.ID_cargo }, cargo);
+            return CreatedAtAction("GetTienda", new { id = tienda.ID_tienda }, tienda);
         }
 
-        // DELETE: api/Cargos/5
+        // DELETE: api/Tiendas/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Cargo>> DeleteCargo(int id)
+        public async Task<ActionResult<Tienda>> DeleteTienda(int id)
         {
-            var cargo = await _context.cargo.FindAsync(id);
-            if (cargo == null)
+            var tienda = await _context.Tienda.FindAsync(id);
+            if (tienda == null)
             {
                 return NotFound();
             }
 
-            _context.cargo.Remove(cargo);
+            _context.Tienda.Remove(tienda);
             await _context.SaveChangesAsync();
 
-            return cargo;
+            return tienda;
         }
 
-        private bool CargoExists(int id)
+        private bool TiendaExists(int id)
         {
-            return _context.cargo.Any(e => e.ID_cargo == id);
+            return _context.Tienda.Any(e => e.ID_tienda == id);
         }
     }
 }

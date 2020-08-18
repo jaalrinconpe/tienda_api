@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
+using tienda_api.Models;
 
 namespace tienda_api.Models
 {
@@ -9,6 +10,10 @@ namespace tienda_api.Models
         {
         }
 
-        public DbSet<Cargo> cargos { get; set; }
+        public DbSet<Cargo> cargo { get; set; }
+
+        public DbSet<tienda_api.Models.Empleado> Empleado { get; set; }
+
+        public DbSet<tienda_api.Models.Tienda> Tienda { get; set; }
     }
 }

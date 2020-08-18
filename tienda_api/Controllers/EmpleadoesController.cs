@@ -11,48 +11,48 @@ namespace tienda_api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CargosController : ControllerBase
+    public class EmpleadoesController : ControllerBase
     {
         private readonly TiendaContext _context;
 
-        public CargosController(TiendaContext context)
+        public EmpleadoesController(TiendaContext context)
         {
             _context = context;
         }
 
-        // GET: api/Cargos
+        // GET: api/Empleadoes
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Cargo>>> Getcargos()
+        public async Task<ActionResult<IEnumerable<Empleado>>> GetEmpleado()
         {
-            return await _context.cargo.ToListAsync();
+            return await _context.Empleado.ToListAsync();
         }
 
-        // GET: api/Cargos/5
+        // GET: api/Empleadoes/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Cargo>> GetCargo(int id)
+        public async Task<ActionResult<Empleado>> GetEmpleado(int id)
         {
-            var cargo = await _context.cargo.FindAsync(id);
+            var empleado = await _context.Empleado.FindAsync(id);
 
-            if (cargo == null)
+            if (empleado == null)
             {
                 return NotFound();
             }
 
-            return cargo;
+            return empleado;
         }
 
-        // PUT: api/Cargos/5
+        // PUT: api/Empleadoes/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCargo(int id, Cargo cargo)
+        public async Task<IActionResult> PutEmpleado(int id, Empleado empleado)
         {
-            if (id != cargo.ID_cargo)
+            if (id != empleado.ID_empleado)
             {
                 return BadRequest();
             }
 
-            _context.Entry(cargo).State = EntityState.Modified;
+            _context.Entry(empleado).State = EntityState.Modified;
 
             try
             {
@@ -60,7 +60,7 @@ namespace tienda_api.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!CargoExists(id))
+                if (!EmpleadoExists(id))
                 {
                     return NotFound();
                 }
@@ -73,37 +73,37 @@ namespace tienda_api.Controllers
             return NoContent();
         }
 
-        // POST: api/Cargos
+        // POST: api/Empleadoes
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Cargo>> PostCargo(Cargo cargo)
+        public async Task<ActionResult<Empleado>> PostEmpleado(Empleado empleado)
         {
-            _context.cargo.Add(cargo);
+            _context.Empleado.Add(empleado);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetCargo", new { id = cargo.ID_cargo }, cargo);
+            return CreatedAtAction("GetEmpleado", new { id = empleado.ID_empleado }, empleado);
         }
 
-        // DELETE: api/Cargos/5
+        // DELETE: api/Empleadoes/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Cargo>> DeleteCargo(int id)
+        public async Task<ActionResult<Empleado>> DeleteEmpleado(int id)
         {
-            var cargo = await _context.cargo.FindAsync(id);
-            if (cargo == null)
+            var empleado = await _context.Empleado.FindAsync(id);
+            if (empleado == null)
             {
                 return NotFound();
             }
 
-            _context.cargo.Remove(cargo);
+            _context.Empleado.Remove(empleado);
             await _context.SaveChangesAsync();
 
-            return cargo;
+            return empleado;
         }
 
-        private bool CargoExists(int id)
+        private bool EmpleadoExists(int id)
         {
-            return _context.cargo.Any(e => e.ID_cargo == id);
+            return _context.Empleado.Any(e => e.ID_empleado == id);
         }
     }
 }
